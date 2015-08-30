@@ -1,0 +1,26 @@
+{
+  "name": "error.js",
+  "version": "1.0.0",
+  "description": "Custom errors in javascript (browser and server support)",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --recursive *.spec.js",
+    "test-watch": "NODE_ENV=test mocha --watch --recursive *.spec.js"
+  },
+  "keywords": [
+    "custom",
+    "error",
+    "javascript",
+    "isomorphic",
+    "browser",
+    "server",
+    "react"
+  ],
+  "repository": "https://github.com/Krossnine/error.js.git",
+  "author": "Krossnine",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  }
+}
