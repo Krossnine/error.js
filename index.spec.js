@@ -19,7 +19,7 @@ describe("CustomError", function() {
     };
     var ServerError = CustomError.create(errorArgs);
     var serverError = new ServerError();
-    expect(serverError).to.deep.equals(errorArgs);
+    expect(serverError).to.contains(errorArgs);
   });
 
   it("should throw a custom error with custom message", function() {

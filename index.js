@@ -32,12 +32,13 @@ function createCustomError(defaultErrorArgs) {
   };
 
   util.inherits(CustomError, Error);
+  CustomError.prototype._isCustom = true;
 
   return CustomError;
 }
 
 function isCustomError(err) {
-  return err.name !== "Error";
+  return err._isCustom === true;
 }
 
 module.exports = {
