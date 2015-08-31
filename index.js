@@ -36,6 +36,11 @@ function createCustomError(defaultErrorArgs) {
   return CustomError;
 }
 
+function isCustomError(err) {
+  return err.name !== "Error";
+}
+
 module.exports = {
-  create : createCustomError
+  create : createCustomError,
+  isCustom : isCustomError
 };

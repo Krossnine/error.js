@@ -80,4 +80,15 @@ describe("CustomError", function() {
     expect(myCustomError.toString()).to.equals("Name: Message");
   });
 
+  it("should detect custom error", function() {
+    var TestError = CustomError.create("TestError");
+    var testError = new TestError();
+    expect(CustomError.isCustom(testError)).to.be.true;
+  });
+
+  it("should not detect standard error as custom", function() {
+    var error = new Error();
+    expect(CustomError.isCustom(error)).to.be.false;
+  });
+
 });

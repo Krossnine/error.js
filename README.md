@@ -64,4 +64,21 @@ throw new NotFoundError({
 });
 ```
 
+### Check if an Error is a custom error :
+
+```javascript
+var MyCustomError = CustomError.create("MyCustomError");
+var myCustomError = new MyCustomError("oops");
+
+/* Will return true */
+CustomError.isCustom(myCustomError);
+```
+
+```javascript
+var e = new Error("oops");
+
+/* Will return false */
+CustomError.isCustom(e);
+```
+
 
