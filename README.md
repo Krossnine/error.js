@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/Krossnine/error.js.svg?branch=master)](https://travis-ci.org/Krossnine/error.js)
 [![Dependency Status](https://david-dm.org/krossnine/custom-error.svg?style=flat)](https://david-dm.org/Krossnine/custom-error#info=dependencies)
 [![devDependency Status](https://david-dm.org/Krossnine/custom-error/dev-status.svg)](https://david-dm.org/Krossnine/custom-error#info=devDependencies)
+[![Build Status](https://badge.fury.io/js/error.js.svg)](https://www.npmjs.com/package/error.js)
+
 
 # Create custom errors in javascript
 
