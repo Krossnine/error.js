@@ -1,6 +1,6 @@
 {
   "name": "error.js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Custom errors in javascript (browser and server support)",
   "main": "index.js",
   "scripts": {

@@ -28,7 +28,9 @@ function createCustomError(defaultErrorArgs) {
     assign(this, normalizeCustomErrorArgs(customErrorArgs));
     this.message = this.message || '';
 
-    Error.captureStackTrace(this, this.constructor);
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, this.constructor);
+    }
   };
 
   util.inherits(CustomError, Error);
