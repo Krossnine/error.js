@@ -91,4 +91,37 @@ describe("CustomError", function() {
     expect(CustomError.isCustom(error)).to.be.false;
   });
 
+  describe("inheritance", function () {
+    it("should found parent attributes on child error", function() {
+      var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+      var ChildError = CustomError.create("ChildError", ParentError);
+
+      expect(new ChildError().content).to.be.equal("parent");
+    });
+
+    it("should ovveride parent attributes on child error", function() {
+      var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+      var ChildError = CustomError.create("ChildError", ParentError);
+
+      expect(new ChildError({content : "override"}).content).to.be.equal("override");
+    });
+
+    it("should be custom error if inheritance", function() {
+      var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+      var ChildError = CustomError.create("ChildError", ParentError);
+
+      expect(CustomError.isCustom(new ChildError())).to.be.true;
+    });
+
+    it("should instanceOf each parent", function() {
+      var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+      var ChildError = CustomError.create("ChildError", ParentError);
+
+      expect(new ChildError()).to.be.instanceOf(ChildError);
+      expect(new ChildError()).to.be.instanceOf(ParentError);
+      expect(new ChildError()).to.be.instanceOf(Error);
+    });
+
+
+  })
 });
