@@ -19,28 +19,30 @@ function ensureArgs(args) {
   throw new Error("Invalid CustomError arguments");
 }
 
-function createCustomError(defaultErrorArgs) {
+function createCustomError(defaultErrorArgs, ParentError) {
 
   ensureArgs(defaultErrorArgs);
 
   var CustomError = function(customErrorArgs) {
-    assign(this, normalizeErrorArgs(defaultErrorArgs));
-    assign(this, normalizeCustomErrorArgs(customErrorArgs));
-    this.message = this.message || '';
+    assign(CustomError.prototype, normalizeCustomErrorArgs(customErrorArgs));
 
     if (typeof Error.captureStackTrace === 'function') {
       Error.captureStackTrace(this, this.constructor);
     }
   };
 
-  util.inherits(CustomError, Error);
-  CustomError.prototype._isCustom = true;
+  util.inherits(CustomError, ParentError || Error);
+  assign(CustomError.prototype, normalizeErrorArgs(defaultErrorArgs));
 
   return CustomError;
 }
 
 function isCustomError(err) {
-  return err._isCustom === true;
+  function getPrototypeOfConstructor(instance) {
+    return instance && instance.constructor && instance.constructor.prototype;
+  }
+
+  return getPrototypeOfConstructor(getPrototypeOfConstructor(err)) instanceof Error;
 }
 
 module.exports = {
