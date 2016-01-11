@@ -24,7 +24,7 @@ function createCustomError(defaultErrorArgs, ParentError) {
   ensureArgs(defaultErrorArgs);
 
   var CustomError = function(customErrorArgs) {
-    assign(CustomError.prototype, normalizeCustomErrorArgs(customErrorArgs));
+    assign(this, normalizeCustomErrorArgs(customErrorArgs));
 
     if (typeof Error.captureStackTrace === 'function') {
       Error.captureStackTrace(this, this.constructor);
@@ -33,6 +33,9 @@ function createCustomError(defaultErrorArgs, ParentError) {
 
   util.inherits(CustomError, ParentError || Error);
   assign(CustomError.prototype, normalizeErrorArgs(defaultErrorArgs));
+  CustomError.prototype.toJSON = function toJSON() {
+    return assign({}, this);
+  };
 
   return CustomError;
 }
@@ -47,5 +50,5 @@ function isCustomError(err) {
 
 module.exports = {
   create : createCustomError,
-  isCustom : isCustomError
+  isCustom : isCustomError,
 };
