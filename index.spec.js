@@ -122,6 +122,24 @@ describe("CustomError", function() {
       expect(new ChildError()).to.be.instanceOf(Error);
     });
 
+    it("should not instanceOf sibling", function () {
+      var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+      var Sibling = CustomError.create({name : "ParentError", content : "parent"});
+      var ChildError = CustomError.create("ChildError", ParentError);
 
+      expect(new ChildError()).not.to.be.instanceOf(Sibling);
+    });
+  });
+
+  it("stringify", function () {
+    var ParentError = CustomError.create({name : "ParentError", content : "parent"});
+    var ChildError = CustomError.create({name : "ChildError", child : "child"}, ParentError);
+
+    var parse = JSON.parse(JSON.stringify(new ChildError({"prop" : "prop"})));
+    expect(parse).to.have.property("prop");
+    expect(parse).to.have.property("content");
+    expect(parse).to.have.property("child");
+    expect(parse).to.have.property("name");
+    expect(parse).not.to.have.property("toJSON");
   })
 });
